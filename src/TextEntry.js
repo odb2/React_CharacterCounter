@@ -6,49 +6,63 @@ class TextEntry extends Component {
         this.state = {
             CharacterCount: 0,
             CharactersDict: [],
-            CharactersTopFive_keys: []
+            CharactersTopFive_keys: [],
+            CharacterArray: []
         }
     }
     textchange(e) {
         var array = e.target.value.split('');
         var obj = {};
+
         for (var i=0; i < array.length; i++) {
-          obj[array[i]] = (obj[array[i]] || 0) +1 ;
+            obj[array[i]] = (obj[array[i]] || 0) + 1;
         }
 
         //Copys the obj which contains the counts of characters
         var copy = {};
         Object.assign(copy,obj);
 
-        //Sorts the copy from fewest counts to largest counts
-        const sortable = Object.entries(copy)
-        .sort(([,a],[,b]) => a-b)
-        .reduce((r, [k, v]) => ({ ...r, [k]: v }), {});
+        var keysSorted = Object.keys(copy).sort(function(a,b){
+            return copy[a]-copy[b]
+        })
 
-        const top_five = Object.fromEntries(Object.entries(sortable).slice(-5));
-        
-        const top_five_keys = Object.keys(top_five)
-        
+        var uniq = [...new Set(array)];
+        var uniq2 = [...new Set(array)];
+        uniq2.reverse();
+
+        var keysSorted = uniq2.sort(function(a,b){
+            return copy[a]-copy[b]
+        })
+        console.log(keysSorted)
+
         this.setState({
             CharacterCount: e.target.value.length,
             CharactersDict: obj,
-            CharactersTopFive_keys: top_five_keys
+            CharactersTopFive_keys: keysSorted.slice(-5),
+            CharacterArray: uniq
         });
     };
 
     render() {
         return (
-            <div>
-                <textarea placeholder="Enter Text Here" onChange={ (e) => this.textchange(e) }></textarea>
-                <p>Number of characters: {this.state.CharacterCount}</p>
-                <ul>
+            <div id="textentry">
+                <h1>Character Counter</h1>
+                <p><b>Directions:</b> Enter text and then see the table of characters expand along with the total number of each character. Characters are sorted by total amount then by seniority on the table.</p>
+                <textarea id="textbox" placeholder="Enter Text Here" onChange={ (e) => this.textchange(e) }></textarea>
+                <p>Total Number of characters: {this.state.CharacterCount}</p>
+                <table>
+                    <tr>
+                    <th>Character</th>
+                    <th>Total Amount</th>
+                    </tr>
                     {
-                        Object.entries(this.state.CharactersDict).map( ([key,value]) =>
-                        <li id={key} style={{ backgroundColor: (this.state.CharactersTopFive_keys.includes(key)) ? "yellow" : "white" }}>
-                            {key}, {value}
-                        </li>
+                        this.state.CharacterArray.map( key =>
+                        <tr id={key} style={{ backgroundColor: (this.state.CharactersTopFive_keys.includes(key)) ? "yellow" : "white" }}>
+                            <td>{key}</td>
+                            <td>{this.state.CharactersDict[key]}</td>
+                        </tr>
                     )}
-                </ul>
+                </table>
             </div>
         );
     }
