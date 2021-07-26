@@ -22,10 +22,6 @@ class TextEntry extends Component {
         var copy = {};
         Object.assign(copy,obj);
 
-        var keysSorted = Object.keys(copy).sort(function(a,b){
-            return copy[a]-copy[b]
-        })
-
         var uniq = [...new Set(array)];
         var uniq2 = [...new Set(array)];
         uniq2.reverse();
