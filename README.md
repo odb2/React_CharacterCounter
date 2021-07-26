@@ -25,12 +25,12 @@ characters in the text.
 ## Installation
 
 * Built using ReactJS
-* The project is deployed and live through Heroku located at this link https://react-charactercounter.herokuapp.com/
+* The project is deployed and live through Heroku located at this <a target="_blank" href="https://react-charactercounter.herokuapp.com/">Link to Heroku App</a>
 * Or download through git clone (then run "npm install" and "npm start" and go to localhost:3000 to view app)
 
 ## How It Works
 
-1. Open localhost:3000 or visit https://react-charactercounter.herokuapp.com/
+1. Open localhost:3000 or visit <a target="_blank" href="https://react-charactercounter.herokuapp.com/">Link to Heroku App</a>
 
 <div align="center"><img width="600" src="frontpage.png" /></div>
 
