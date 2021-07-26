@@ -30,7 +30,7 @@ characters in the text.
 
 ## How It Works
 
-1. Open localhost:3000 or visit https://acheater-reporter.herokuapp.com/
+1. Open localhost:3000 or visit https://react-charactercounter.herokuapp.com/
 
 <div align="center"><img width="600" src="frontpage.png" /></div>
 
